@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
+import model.dao.DepartmentDao;
 import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
@@ -48,6 +49,36 @@ public class Application {
 		seller = sellerDao.findById(1);
 		sellerDao.deleteById(seller.getId());
 		System.out.println("Delete complete! ");
+		
+		System.out.println("============================================DEPARTMENT=========================");
+		
+		DepartmentDao depDao = DaoFactory.createDepartmentDao();
+		System.out.println("\n === Test 7: Department FindById ======");
+		
+		Department department = depDao.findById(4);
+		System.out.println(department);
+		
+		System.out.println("\n === Test 8: Department FindAll ======");
+		List<Department> departments = depDao.findAll();
+		for(Department deps : departments) {
+			System.out.println(deps);
+		}
+		
+		System.out.println("\n === Test 9: Department Insert ======");
+		Department newDepartment = new Department(null,"Academy");
+		depDao.insert(newDepartment);
+		System.out.println("Inserted department!" + newDepartment.getId());
+	
+		System.out.println("\n === Test 10: Department Update ======");
+		department = depDao.findById(6);
+		department.setName("Eletric Domestic");
+		depDao.update(department);
+		System.out.println("Updated Complete!");
+		
+		System.out.println("\n === Test 11: Department DELETE ======");
+		department = depDao.findById(8);
+		depDao.deleteById(department.getId());
+		System.out.println("Deleted complete! ");
 		
 	}
 
